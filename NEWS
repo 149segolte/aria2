@@ -1,89 +1,40 @@
-aria2 1.33.0
+aria2 1.36.0
 ============
 
 Release Note
 ------------
 
-This release fixes several bugs, and add new features.
+This release fixes several bugs.  See Changes for details.
 
 Changes
 -------
 
-* Include arm in a filename of android zip
+* Update wslay
 
-* Upgrade base image of Dockerfile.mingw to ubuntu:16.04
+* Bump Windows build dependencies
 
-* wintls: Potential fix for undecrypted read
+* Bump android build dependencies
 
-  GH-1021
+* Fix segfault when time_t is 64bit on 32bit arch
 
-* libaria2: Return last error code from DownloadHandle::getErrorCode
+  Patch from Natanael Copa
 
-  GH-991
+  GH-1666
 
-* Windows: pass writefds also as exceptfds to select()
+* Updates the make_bash_completion script to Python3.
 
-  winsock notifies connect() failures on exceptfds instead of
-  writefds.
+  Patch from sleepymac
 
-  Fixes GH-969
-  Fixes GH-975
+  GH-1672
 
-* libuv: use pkg-config
+* Prevent corrupt downloads after app and/or system crash
 
-* FeatureConfig: align text
+  Patch from Ali MJ Al-Nasrawy
 
-* Update Dockerfile.mingw
+  GH-1644
 
-  avoid docker cache when using git
+* Reset sessionDownloadLength and sessionUploadLength on download start
 
-  Patch from qweaszxcdf
+  GH-1486
 
-  GH-970
-
-* Add --peer-agent option
-
-  Add --peer-agent for setting the version/user agent used in the
-  extended handshake protocol for bittorrent.
-
-  Patch from Kurt Kartaltepe
-
-  GH-947
-
-* OSX: Allow to specify a build
-
-* OSX: update c-ares
-
-* [Docs, libaria2] Fix type of obj pushed into options vector
-
-  aria::KeyVals is a vector of pair of std strings, therefore the type
-  of object being pushed should be std::pair<std::string,
-  std::string>, however in the docs, the type of the said object is
-  KeyVals.  If one follows the docs, their code will fail to compile.
-
-  Patch from geetam
-
-  GH-941
-
-* AppleTLS: Silence cipher suite selection
-
-* Unbreak build OSX build
-
-* Update macOS versions
-
-* Add --bt-load-saved-metadata option
-
-  Before getting torrent metadata from DHT when downloading with
-  magnet link, first try to read file saved by --bt-save-metadata
-  option. If it is successful, then skip downloading metadata from
-  DHT.  By default, this feature is turned off.
-
-  GH-909
-
-* Fix regression in bfc54d0b9a694e5d87efd8ed11b5393bc4b66f93
-
-  Don't save control file if --auto-save-interval is 0.
-
-  GH-917
-
-* Fix infinite loop bug when file is not found
+* AppleTLS: Add TLSv1.3 support
